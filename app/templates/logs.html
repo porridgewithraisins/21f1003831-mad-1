@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ tracker.name }}</h2>
+<h4>{{ tracker.type }}</h4>
+<p>{{ tracker.settings }}</p>
+
+<h4>Add a log</h4>
+<form id="create-log-form" method="post">
+    <input type="datetime-local" name="timestamp" value="{{ now }}">
+    <input type="text" name="value" placeholder="Value">
+    <input type="text" name="note" placeholder="Note">
+    <input type="submit" value="Add">
+</form>
+{% if tracker.logs %}
+<ul>
+    {% for log in tracker.logs %}
+    <li>
+        <a href="/trackers/{{ tracker.id }}/logs/{{ log.id }}">{{ log.timestamp }}</a>
+        <p>{{ log.value }}</p>
+        <p>{{ log.note }}</p>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No logs yet.</p>
+{% endif %}
+<img src="{{ image_url }}">
+{% endblock %}

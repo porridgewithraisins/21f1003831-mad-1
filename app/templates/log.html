@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Log</h2>
+<p>Edit it to update</p>
+<form method="post">
+    <input type="datetime-local" name="timestamp" value="{{ log.timestamp}}">
+    <input type="text" name="value" value="{{ log.value }}">
+    <input type="text" name="note" value="{{ log.note }}">
+    <input type="submit" value="Update">
+</form>
+<a href="/trackers/{{ log.tracker.id }}/logs/{{ log.id }}/delete">Delete log</a>
+{% endblock %}

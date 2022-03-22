@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Import</h2>
+<form action="/import" method="post" enctype="multipart/form-data">
+    <label for="file">File <small>Allowed extensions: .zip</small></label>
+    <input type="file" name="file" id="file">
+    <input type="submit" value="Import">
+</form>
+{% endblock %}

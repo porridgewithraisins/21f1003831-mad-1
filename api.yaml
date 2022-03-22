@@ -1,0 +1,139 @@
+- title: Quantified Self
+- endpoints:
+    - auth:
+        - login:
+            - path: /login
+            - method: POST
+            - media-type: application/x-www-form-urlencoded
+            - request-body:
+                - username:
+                    - type: string
+                    - required: true
+                - password:
+                    - type: string
+                    - required: true
+        - register:
+            - path: /register
+            - method: POST
+            - media-type: application/x-www-form-urlencoded
+            - request-body:
+                - username:
+                    - type: string
+                    - required: true
+                - password:
+                    - type: string
+                    - required: true
+        - logout:
+            - method: GET
+            - path: /logout
+            - authentication: cookie
+    - user:
+        - profile:
+            - method: GET
+            - path: /profile
+            - authentication: cookie
+    - trackers:
+        - all-trackers:
+            - method: GET
+            - path: /trackers
+            - authentication: cookie
+        - one-tracker:
+            - method: GET
+            - path: /trackers/<tracker_id>
+            - authentication: cookie
+        - add-tracker:
+            - method: POST
+            - path: /trackers
+            - media-type: application/x-www-form-urlencoded
+            - request-body:
+                - name:
+                    - type: string
+                    - required: true
+                - type:
+                    - type: string
+                    - required: true
+                - settings:
+                    - type: string
+                    - required: false
+            - authentication: cookie
+        - update-tracker:
+            - method: POST
+            - path: /trackers/<tracker_id>
+            - media-type: application/x-www-form-urlencoded
+            - request-body:
+                - name:
+                    - type: string
+                    - required: false
+                - type:
+                    - type: string
+                    - required: false
+                - settings:
+                    - type: string
+                    - required: false
+            - authentication: cookie
+        - delete-tracker:
+            - method: GET
+            - path: /trackers/<tracker_id>/delete
+            - authentication: cookie
+    - logs:
+        - all-logs:
+            - method: GET
+            - path: /trackers/<tracker_id>/logs
+            - authentication: cookie
+        - one-log:
+            - method: GET
+            - path: /trackers/<tracker_id>/logs/<log_id>
+            - authentication: cookie
+        - add-log:
+            - method: POST
+            - path: /trackers/<tracker_id>/logs
+            - media-type: application/x-www-form-urlencoded
+            - request-body:
+                - timestamp:
+                    - type: string
+                    - required: true
+                - value:
+                    - type: string
+                    - required: true
+                - note:
+                    - type: string
+                    - required: false
+            - authentication: cookie
+        - update-log:
+            - method: POST
+            - path: /trackers/<tracker_id>/logs/<log_id>
+            - media-type: application/x-www-form-urlencoded
+            - request-body:
+                - timestamp:
+                    - type: string
+                    - required: false
+                - value:
+                    - type: string
+                    - required: false
+                - note:
+                    - type: string
+                    - required: false
+            - authentication: cookie
+        - delete-log:
+            - method: GET
+            - path: /trackers/<tracker_id>/logs/<log_id>/delete
+            - authentication: cookie
+    - export-import:
+        - export:
+            - method: GET
+            - path: /export
+            - authentication: cookie
+            - response:
+                - type: file
+                - filename: out.zip
+                - mimetype: application/zip
+        - import:
+            - method: POST
+            - path: /import
+            - media-type: application/x-www-form-urlencoded
+            - request-body:
+                - file:
+                    - type: file
+                    - mimetype: application/zip
+                    - required: true
+            - authentication: cookie

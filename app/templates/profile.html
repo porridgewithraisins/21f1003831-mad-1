@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<p><b>Username:</b> {{ username }}</p>
+<p><b>Tracker count:</b> {{ tracker_count }}</p>
+<p><b>Logs made:</b> {{ log_count }}</p>
+<a href="/export">Download all your data</a>
+<p> or </p>
+<a href="/import">Import data</a>
+{% endblock %}

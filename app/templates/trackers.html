@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>My Trackers</h2>
+<div>
+    <h4>Add tracker</h4>
+    <form id="create-tracker-form" method="post">
+        <input type="text" name="name" placeholder="Name">
+        <input type="radio" name="type" placeholder="Type" value="Qualitative" checked>
+        <label for="type">Qualitative</label>
+        <input type="radio" name="type" placeholder="Type" value="Quantitative">
+        <label for="type">Quantitative</label>
+        <div id="settings-input">
+            <label for="settings">Possible values</label>
+            <input type="text" name="settings" placeholder="comma,separated">
+        </div>
+        <input type="submit" value="Add">
+    </form>
+</div>
+<div>
+    {%if trackers %}
+    <ul>
+        {% for tracker in trackers %}
+        <li>
+            <a href="/trackers/{{ tracker.id }}">{{ tracker.name }}</a>
+            Last accessed: <time datetime="{{ last_accessed }}">{{ last_accessed.replace('T', ' ') }}</time>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No trackers yet.</p>
+    {% endif %}
+</div>
+
+<script>
+    window.document.querySelector('form').addEventListener('change', () => {
+        console.log('here');
+        const type = document.querySelector('input[name="type"]:checked')?.value;
+        if (type === 'Qualitative') document.querySelector('input[name="settings"]').style.display = 'unset';
+        else {
+            const settingsInput = document.querySelector('#settings-input');
+            settingsInput.style.display = 'none';
+            settingsInput.querySelector('input').disabled = true;
+        }
+    });
+</script>
+
+{% endblock %}

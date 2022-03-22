@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ tracker.name }}</h2>
+<p>{{ tracker.type }}</p>
+<p>{{ tracker.settings if tracker.settings else "" }}</p>
+<p><a href="/trackers/{{ tracker.id }}/logs">Logs</a></p>
+<p><a href="/trackers/{{ tracker.id }}/delete">Delete Tracker</a></p>
+{% endblock %}
